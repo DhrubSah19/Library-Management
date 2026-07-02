@@ -23,9 +23,14 @@ export const app = express() ;
 
 config({path: "./config/config.env"});
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "http://localhost:5173",
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: allowedOrigins,
     method: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
